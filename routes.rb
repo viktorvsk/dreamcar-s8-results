@@ -1,17 +1,6 @@
 # frozen_string_literal: true
 
-get '/' do
-  accounts = REDIS.scan(0, match: "*#{params[:search]}*").last.sort
-
-  if accounts.any?
-    ids = REDIS.mget(*accounts)
-    Hash[accounts.zip(ids)].to_json
-  else
-    [].to_json
-  end
-end
-
-put '/update' do
+put '/' do
   raise if params[:password].strip != ENV['PASSWORD'].strip
   raise unless params[:file]
   raise unless params[:file][:tempfile]
