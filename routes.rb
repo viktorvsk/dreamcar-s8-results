@@ -19,7 +19,7 @@ put '/' do
   end
 
   if result.first == 'OK'
-    'OK'
+    redirect 'http://audi_s8.recar.io/admin'
   else
     'ERROR'
   end
